@@ -1,4 +1,11 @@
-package org.udevs.LLDProject.ridesharingapp;
+package org.udevs.LLDProject.ridesharingapp.service;
+
+import org.udevs.LLDProject.ridesharingapp.entity.Location;
+import org.udevs.LLDProject.ridesharingapp.entity.Ride;
+import org.udevs.LLDProject.ridesharingapp.entity.RideStatus;
+import org.udevs.LLDProject.ridesharingapp.model.Driver;
+import org.udevs.LLDProject.ridesharingapp.model.Passenger;
+import org.udevs.LLDProject.ridesharingapp.strategy.FareStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,20 +16,20 @@ public class RideMatchingService {
         availableDrivers.add(driver);
     }
 
-    public void requestRide(Passenger passenger, Double distanceTravel, FareStartegy fareStartegy){
+    public void requestRide(Passenger passenger, Double distanceTravel, FareStrategy fareStrategy){
         if(availableDrivers.isEmpty()){
             passenger.notify("Drivers are not available");
             return;
         }
         //find nearest dirver
-        Driver nearDriver = findNearestDriver(passenger.location);
+        Driver nearDriver = findNearestDriver(passenger.getLocation());
         availableDrivers.remove(nearDriver);
 
         // passenger.notify("Ride schedule successfully" + nearestDriver);
-        Ride ride = new Ride(passenger, nearDriver, distanceTravel, fareStartegy);
+        Ride ride = new Ride(passenger, nearDriver, distanceTravel, fareStrategy);
 
         passenger.notify("Ride schedued with fare + Rs" + ride.getFare());
-        nearDriver.notify("You have a new ride request for " + ride.getFare());
+        nearDriver.notify("You have a new ride request for " + ride.getFare() + " Rs");
 
 
         //Make a Time Delay and Change the Status of the Ride.
@@ -46,8 +53,8 @@ public class RideMatchingService {
         Driver assignedDriver = null;
         Double minDistace = Double.MAX_VALUE;
         for(Driver driver : availableDrivers){
-            if(driver.location.calDist(location)<minDistace){
-                minDistace=driver.location.calDist(location);
+            if(driver.getLocation().calDist(location)<minDistace){
+                minDistace= driver.getLocation().calDist(location);
                 assignedDriver = driver;
             }
         }

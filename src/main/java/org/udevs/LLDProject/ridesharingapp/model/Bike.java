@@ -1,6 +1,6 @@
-package org.udevs.LLDProject.ridesharingapp;
+package org.udevs.LLDProject.ridesharingapp.model;
 
-public class Bike extends Vehicle{
+public class Bike extends Vehicle {
     public Bike(String numberPalte) {
         super(numberPalte);
     }

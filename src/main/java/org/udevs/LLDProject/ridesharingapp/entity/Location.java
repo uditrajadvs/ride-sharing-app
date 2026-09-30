@@ -1,4 +1,4 @@
-package org.udevs.LLDProject.ridesharingapp;
+package org.udevs.LLDProject.ridesharingapp.entity;
 
 public class Location {
 
@@ -22,16 +22,8 @@ public class Location {
         //Euclidean Distance
         double dx = this.latitude-l.latitude;
         double dy = this.longitude-l.longitude;
-        return Math.sqrt((dx*dx)+(dy*dx));
+        return Math.sqrt((dx*dx)+(dy*dy));
 
         //Haversine formula ->shortest distance between two points on a sphere.
     }
-
-//    public void setLatitude(Double latitude) {
-//        this.latitude = latitude;
-//    }
-//
-//    public void setLongitude(Double longitude) {
-//        this.longitude = longitude;
-//    }
 }
