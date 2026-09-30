@@ -1,4 +1,4 @@
-package org.udevs.LLDProject.ridesharingapp;
+package org.udevs.LLDProject.ridesharingapp.model;
 
 public abstract class Vehicle {
 
@@ -7,7 +7,6 @@ public abstract class Vehicle {
     public Vehicle(String numberPalte) {
         this.numberPalte = numberPalte;
     }
-
 
     //fare per KM
     public abstract double getFarePerKM();

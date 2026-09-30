@@ -1,8 +1,12 @@
-package org.udevs.LLDProject.ridesharingapp;
+package org.udevs.LLDProject.ridesharingapp.entity;
 
-enum RideStatus{
-    SCHEDULED, ONGOING, COMPLETED;
-}
+import org.udevs.LLDProject.ridesharingapp.model.Driver;
+import org.udevs.LLDProject.ridesharingapp.model.Passenger;
+import org.udevs.LLDProject.ridesharingapp.strategy.FareStrategy;
+
+//enum RideStatus{
+//    SCHEDULED, ONGOING, COMPLETED;
+//}
 public class Ride {
     private Passenger passenger;
     private Driver driver;
@@ -10,15 +14,15 @@ public class Ride {
     private RideStatus rideStatus;
     private double fare;
     private double distance;
-    private FareStartegy fareStartegy;
+    private FareStrategy fareStrategy;
 
-    public Ride(Passenger passenger, Driver driver, double distance, FareStartegy fareStartegy) {
+    public Ride(Passenger passenger, Driver driver, double distance, FareStrategy fareStrategy) {
         this.passenger = passenger;
         this.driver = driver;
         this.distance = distance;
-        this.fareStartegy = fareStartegy;
+        this.fareStrategy = fareStrategy;
         this.rideStatus = RideStatus.SCHEDULED;
-        this.fare = fareStartegy.calculateFare(driver.getVehicle(), distance);
+        this.fare = fareStrategy.calFareByStrategy(driver.getVehicle(), distance);
     }
 
 //    public void calfare(){
@@ -34,19 +38,19 @@ public class Ride {
         if(status == RideStatus.COMPLETED){
             passenger.notify(
                     "Ride Completed ✅\n" +
-                            "Dear " + passenger.name +
+                            "Dear " + passenger.getName() +
                             ", your destination has been reached successfully. " +
                             "Thank you for riding with us. Have a great day!"
             );
             driver.notify(
                     "Ride Completed ✅\n" +
-                            "Dear " + driver.name +
+                            "Dear " + driver.getName() +
                             ", you have successfully completed the trip. " +
                             "Thank you for your service and professionalism."
             );
         }else{
-            passenger.notify(passenger.name + ", Your ride status is : " + rideStatus);
-            driver.notify(driver.name +", Your ride status is : " + rideStatus);
+            passenger.notify(passenger.getName() + ", Your ride status is : " + rideStatus);
+            driver.notify(driver.getName() +", Your ride status is : " + rideStatus);
         }
     }
 

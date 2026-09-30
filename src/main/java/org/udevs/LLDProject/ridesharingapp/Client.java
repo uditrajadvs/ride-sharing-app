@@ -1,5 +1,11 @@
 package org.udevs.LLDProject.ridesharingapp;
 
+import org.udevs.LLDProject.ridesharingapp.entity.Location;
+import org.udevs.LLDProject.ridesharingapp.model.*;
+import org.udevs.LLDProject.ridesharingapp.service.RideMatchingService;
+import org.udevs.LLDProject.ridesharingapp.strategy.LuxuryFareStrategy;
+import org.udevs.LLDProject.ridesharingapp.strategy.StandardFareStrategy;
+
 public class Client {
     public static void main(String[] args) {
         Location l1 = new Location(22.3455, 50.4345);
@@ -22,7 +28,8 @@ public class Client {
         rideService.addDriverToSystem(d2);
         rideService.addDriverToSystem(d3);
 
-        rideService.requestRide(passenger, 20.0, new StandardFareStrategy());
+//        rideService.requestRide(passenger, 20.0, new StandardFareStrategy());
+        rideService.requestRide(passenger, -20.0, new LuxuryFareStrategy());
     }
 }
 
