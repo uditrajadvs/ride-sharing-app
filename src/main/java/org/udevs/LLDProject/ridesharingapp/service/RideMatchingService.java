@@ -17,6 +17,9 @@ public class RideMatchingService {
     }
 
     public void requestRide(Passenger passenger, Double distanceTravel, FareStrategy fareStrategy){
+        if (distanceTravel == null || distanceTravel <= 0) {
+            throw new IllegalArgumentException("Travel distance must be greater than zero");
+        }
         if(availableDrivers.isEmpty()){
             passenger.notify("Drivers are not available");
             return;

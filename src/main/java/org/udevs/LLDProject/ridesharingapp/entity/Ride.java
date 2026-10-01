@@ -57,4 +57,8 @@ public class Ride {
     public double getFare(){
         return fare;
     }
+
+    public RideStatus getRideStatus() {
+        return rideStatus;
+    }
 }

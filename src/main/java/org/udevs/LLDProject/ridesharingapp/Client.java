@@ -28,8 +28,8 @@ public class Client {
         rideService.addDriverToSystem(d2);
         rideService.addDriverToSystem(d3);
 
-//        rideService.requestRide(passenger, 20.0, new StandardFareStrategy());
-        rideService.requestRide(passenger, -20.0, new LuxuryFareStrategy());
+//        rideService.requestRide(passenger, -20.0, new StandardFareStrategy());
+        rideService.requestRide(passenger, 20.0, new LuxuryFareStrategy());
     }
 }
 
